@@ -346,5 +346,8 @@
   "Show Ignored Columns": "Show Ignored Columns",
   "Auto Match Columns": "Auto Match Columns",
   "File not found": "File not found",
-  "There was no data supplied to export": "There was no data supplied to export"
+  "There was no data supplied to export": "There was no data supplied to export",
+  "The PHP extension :name is not installed. Please install this library and activate the extension.": "PHP rozšírenie :name nie je nainštalované. Prosím nainštalujte túto knižnicu a aktivujte rozšírenie.",
+  "The plugin :name is a dependency but is not installed. Please install this plugin.": "Plugin :name je vyžadovaný ale nie je nainštalovaný. Prosím nainštaujte tento plugin.",
+  "Directory :name or its subdirectories is not writable for PHP. Please set corresponding permissions for the webserver on this directory.": "Do adresára :name alebo jeho podadresárov sa nedá zapisovať z PHP. Prosím nastavte správne oprávnenia tomuto adresáru."
 }

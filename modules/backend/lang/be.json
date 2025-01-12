@@ -325,5 +325,7 @@
   "Show Ignored Columns": "Паказаць слупкі якія ігнаруюцца",
   "Auto Match Columns": "Аўтаматычныя суадносіны слупкоў",
   "File not found": "Файл не знойдзены",
-  "There was no data supplied to export": "Няма дадзеных для экспарту"
+  "There was no data supplied to export": "Няма дадзеных для экспарту",
+  "The PHP extension :name is not installed. Please install this library and activate the extension.": "Пашыранне PHP \":name\" не ўсталявана. Калі ласка, ўсталюце пашырэнне і актывуйце яго",
+  "Directory :name or its subdirectories is not writable for PHP. Please set corresponding permissions for the webserver on this directory.": "PHP не можа пісаць у каталог \":name\" альбо ў яго падкаталогі. Калі ласка, вызначце патрэбныя дазволы ў наладах сервера для гэтага каталога"
 }

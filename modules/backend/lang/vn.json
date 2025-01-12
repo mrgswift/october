@@ -187,5 +187,8 @@
   "Show Ignored Columns": "Hiển thị các cột bị bỏ qua",
   "Auto Match Columns": "Tự động khớp các cột",
   "File not found": "Không tìm thấy file",
-  "There was no data supplied to export": "Không có dữ liệu để xuất ra"
+  "There was no data supplied to export": "Không có dữ liệu để xuất ra",
+  "The PHP extension :name is not installed. Please install this library and activate the extension.": "PHP extension :name chưa được cài đặt. Vui lòng cài đặt extension này từ thư viện và kích hoạt nó.",
+  "The plugin :name is a dependency but is not installed. Please install this plugin.": "Plugin :name cần phải cài đặt. Vui lòng cài đặt plugin này.",
+  "Directory :name or its subdirectories is not writable for PHP. Please set corresponding permissions for the webserver on this directory.": "PHP không có quyền ghi trong thư mục :name hoặc các thư mục con của nó. Vui lòng kiểm tra lại quyền ghi cho thư mục này."
 }

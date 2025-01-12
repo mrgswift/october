@@ -277,5 +277,15 @@
   "Change Status": "Change Status",
   "Site Definitions": "Site Definitions",
   "The resizer file ':name' is not found.": "The resizer file ':name' is not found.",
-  "The combiner file ':name' is not found.": "The combiner file ':name' is not found."
+  "The combiner file ':name' is not found.": "The combiner file ':name' is not found.",
+  "Core version information": "Core version information",
+  "View Available Updates": "View Available Updates",
+  "System Build": "System Build",
+  "System Issues": "System Issues",
+  "View issues": "View issues",
+  "View event log": "View event log",
+  "Request log": "Request log",
+  "Bad requests": "Bad requests",
+  "Issues found": "Issues found",
+  "No issues": "No issues"
 }

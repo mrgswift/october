@@ -325,5 +325,7 @@
   "Show Ignored Columns": "Εμφάνιση αγνοούμενων στηλών",
   "Auto Match Columns": "Αυτόματή αντιστοίχιση στηλών",
   "File not found": "Το αρχείο δεν βρέθηκε",
-  "There was no data supplied to export": "Δεν υπάρχουν δεδομένα για σταλούν για εξαγωγή"
+  "There was no data supplied to export": "Δεν υπάρχουν δεδομένα για σταλούν για εξαγωγή",
+  "The PHP extension :name is not installed. Please install this library and activate the extension.": "Η επέκταση :name της PHP δεν έχει εγκατασταθεί. Παρακαλούμε εγκαταστήστε την βιβλιοθήκη και ενεργοποιήστε την επέκταση.",
+  "Directory :name or its subdirectories is not writable for PHP. Please set corresponding permissions for the webserver on this directory.": "Ο φάκελος :name ή οι υποφάκελοι του δεν έχουν δικαίωμα εγγραφής για την PHP. Παρακαλούμε ρυθμίστε τα κατάλληλα δικαιώματα στον webserver για αυτό τον καταλογο."
 }

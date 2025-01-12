@@ -346,5 +346,12 @@
   "Show Ignored Columns": "Näytä sivuutetut sarakkeet",
   "Auto Match Columns": "Autom. sarakkeiden sovitus",
   "File not found": "Tiedostoa ei löydy",
-  "There was no data supplied to export": "Ei dataa vietäväksi"
+  "There was no data supplied to export": "Ei dataa vietäväksi",
+  "Debug mode is enabled. This is not recommended for production installations.": "Debug-moodi on valittu. Tätä ei suositella julkaistuihin asennuksiin.",
+  "The backend URL :name is too generic. Please set to something more unique.": "Ylläpidon URL :name on liian yleinen. Anna jokin omaperäisempi.",
+  "An account with a generic login :name was found. Please rename this administrator account.": "Löytyi tili nimeltä :name, joka on liian yleinen. Ole hyvä ja vaihda jokin omaperäisempi nimi.",
+  "The PHP extension :name is not installed. Please install this library and activate the extension.": "PHP laajennus :name ei ole asennettuna. Asenna ja aktivoi kyseinen laajennus.",
+  "The plugin :name is a dependency but is not installed. Please install this plugin.": "Lisäosa :name on riippuvuus, mutta sitä ei ole asennettu. Asenna lisäosa.",
+  "Directory :name or its subdirectories is not writable for PHP. Please set corresponding permissions for the webserver on this directory.": "Hakemisto :name tai sen alihakemistot ei ole PHP:n kirjoitettavissa. Aseta vastaavat oikeudet tälle hakemistolle verkkopalvelimella.",
+  "Add Widget": "Lisää vimpain"
 }

@@ -20,27 +20,6 @@
       'manage_themes' => 'Manage Themes',
       'customize_theme' => 'Customize Theme',
     ],
-    'status_data_source' => [
-      'name' => 'Website Status',
-      'dimension_cms_information' => 'Website status information',
-      'status_maintenance' => 'Maintenance',
-      'status_online' => 'Online',
-      'widgets' => [
-        'status' => [
-          'title' => 'Website Status',
-          'link' => 'Manage status'
-        ]
-      ]
-    ],
-    'report_data_source' => [
-      'name' => 'Traffic Information',
-      'metric_pageviews' => 'Pageviews',
-      'metric_unique_visitors' => 'Unique Visitors',
-      'dimension_city' => 'City',
-      'dimension_country' => 'Country',
-      'dimension_page_path' => 'Page Path',
-      'dimension_referral_domain' => 'Referral Domain'
-    ]
   ],
   'theme' => [
     'active' => [
@@ -268,7 +247,7 @@
     'manage_partials' => 'Create, modify and delete CMS partials',
     'manage_themes' => 'Activate, deactivate and configure CMS themes',
     'manage_theme_options' => 'Configure customization options for the active theme',
-    'manage_internal_traffic_statistics' => 'Purge the Internal Traffic Statistics data'
+    'manage_internal_traffic_statistics' => 'Purge the Internal Traffic Statistics data',
   ],
   'internal_traffic_statistics' => [
     'label' => 'Internal Traffic Statistics',
@@ -284,7 +263,7 @@
     'timezone' => 'Time zone',
     'retention_mon' => ':retention month(s)',
     'retention_indefinite' => 'Indefinite',
-    'purge_success' => 'Internal Traffic Statistics data purged'
+    'purge_success' => 'Internal Traffic Statistics data purged',
   ],
   'theme_log' => [
     'hint' => 'This log displays any changes made to the theme by administrators in the back-end area.',

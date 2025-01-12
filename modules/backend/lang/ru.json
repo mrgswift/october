@@ -346,5 +346,11 @@
   "Show Ignored Columns": "Show Ignored Columns",
   "Auto Match Columns": "Auto Match Columns",
   "File not found": "Файл не найден",
-  "There was no data supplied to export": "There was no data supplied to export"
+  "There was no data supplied to export": "There was no data supplied to export",
+  "Debug mode is enabled. This is not recommended for production installations.": "Включен режим отладки. Не рекомендуется использовать режим отладки для сайта в продакшене.",
+  "The backend URL :name is too generic. Please set to something more unique.": "Адрес \":name\" панели управления слишком простой. Пожалуйста укажите что-нибудь более уникальное.",
+  "An account with a generic login :name was found. Please rename this administrator account.": "Найден аккаунт с логином \":name\". Пожалуйста переименуйте его.",
+  "The PHP extension :name is not installed. Please install this library and activate the extension.": "Расширение PHP :name не установлено. Установите эту библиотеку и активируйте расширение.",
+  "The plugin :name is a dependency but is not installed. Please install this plugin.": "Плагин :name имеет зависимость. Установите этот плагин.",
+  "Directory :name or its subdirectories is not writable for PHP. Please set corresponding permissions for the webserver on this directory.": "Каталог :name или его подкаталоги недоступны для записи. Укажите соответствующие разрешения для веб-сервера."
 }
