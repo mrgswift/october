@@ -33,12 +33,12 @@ Uncombined JavaScript:
 
 ```twig
 {% framework extras %}
-<script src="{{ 'assets/js/controls/alert-dialog.js'|theme}}"></script>
-<script src="{{ 'assets/js/controls/password-dialog.js'|theme}}"></script>
-<script src="{{ 'assets/js/controls/gallery-slider.js'|theme}}"></script>
-<script src="{{ 'assets/js/controls/card-slider.js'|theme}}"></script>
-<script src="{{ 'assets/js/controls/quantity-input.js'|theme}}"></script>
-<script src="{{ 'assets/js/app.js'|theme}}"></script>
+<script src="{{ 'assets/js/controls/alert-dialog.js'|theme }}"></script>
+<script src="{{ 'assets/js/controls/password-dialog.js'|theme }}"></script>
+<script src="{{ 'assets/js/controls/gallery-slider.js'|theme }}"></script>
+<script src="{{ 'assets/js/controls/card-slider.js'|theme }}"></script>
+<script src="{{ 'assets/js/controls/quantity-input.js'|theme }}"></script>
+<script src="{{ 'assets/js/app.js'|theme }}"></script>
 ```
 
 Combined JavaScript:
