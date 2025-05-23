@@ -12,8 +12,6 @@ use Cms\Classes\ThemeManager;
 use Cms\Classes\CmsObjectCache;
 use Cms\Widgets\PageLookup;
 use Cms\Widgets\SnippetLookup;
-use Cms\Classes\CmsReportDataSource;
-use Cms\Classes\CmsStatusDataSource;
 use Backend\Models\UserRole;
 use Backend\Classes\Controller as BackendController;
 use System\Classes\SettingsManager;
@@ -44,7 +42,6 @@ class ServiceProvider extends ModuleServiceProvider
         // Backend specific
         if ($this->app->runningInBackend()) {
             $this->registerPageLookupInstance();
-            $this->registerDashboardDatasource();
         }
     }
 
@@ -68,7 +65,6 @@ class ServiceProvider extends ModuleServiceProvider
         $this->app->singleton('cms.components', \Cms\Classes\ComponentManager::class);
         $this->app->singleton('cms.snippets', \Cms\Classes\SnippetManager::class);
         $this->app->singleton('cms.themes', \Cms\Classes\ThemeManager::class);
-        $this->app->singleton('cms.demos.traffic', \Cms\Classes\CmsDemoTrafficDataGenerator::class);
     }
 
     /**
@@ -254,14 +250,6 @@ class ServiceProvider extends ModuleServiceProvider
                 'tab' => 'Themes',
                 'order' => 400
             ],
-
-            // Internal Traffic Statistics
-            // @vuedashboard
-            // 'cms.internal_traffic_statistics' => [
-            //     'label' => 'cms::lang.permissions.manage_internal_traffic_statistics',
-            //     'tab' => 'Internal Traffic Statistics',
-            //     'order' => 1000
-            // ]
         ];
     }
 
@@ -324,17 +312,6 @@ class ServiceProvider extends ModuleServiceProvider
                 'order' => 910,
                 'keywords' => 'theme change log'
             ],
-            // @vuedashboard
-            // 'internal_traffic_statistics' => [
-            //     'label' => 'cms::lang.internal_traffic_statistics.label',
-            //     'description' => 'cms::lang.internal_traffic_statistics.permission_description',
-            //     'category' => SettingsManager::CATEGORY_CMS,
-            //     'icon' => 'icon-line-chart',
-            //     'url' => Backend::url('cms/internaltrafficstatisticssettings'),
-            //     'class' => \Cms\Models\InternalTrafficStatisticsSetting::class,
-            //     'permissions' => ['cms.internal_traffic_statistics'],
-            //     'order' => 1000
-            // ],
         ];
     }
 
@@ -385,24 +362,6 @@ class ServiceProvider extends ModuleServiceProvider
                 $manager = new SnippetLookup($controller, ['alias' => 'ocsnippetlookup']);
                 $manager->bindToController();
             }
-        });
-    }
-
-    /**
-     * registerDashboardDatasource
-     */
-    protected function registerDashboardDatasource()
-    {
-        $this->callAfterResolving('backend.dashboards', function($manager) {
-            $manager->registerDataSourceClass(
-                CmsReportDataSource::class,
-                "Traffic Information"
-            );
-
-            $manager->registerDataSourceClass(
-                CmsStatusDataSource::class,
-                "Website Status"
-            );
         });
     }
 
