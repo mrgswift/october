@@ -267,7 +267,7 @@ class CodeParser
      */
     protected function getCachedInfo()
     {
-        $cached = Cache::get($this->dataCacheKey, false);
+        $cached = Cache::memo()->get($this->dataCacheKey, false);
 
         if (
             $cached !== false &&
