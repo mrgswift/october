@@ -256,9 +256,9 @@ class Controller
             $result = $event;
         }
 
-        // Log the pageview
-        if ($originalPageFound && !App::runningUnitTests()) {
-            TrafficLogger::logPageview();
+        // Log the pageview with dashboard module
+        if ($originalPageFound && !App::runningUnitTests() && System::hasModule('Dashboard')) {
+            \Dashboard\Classes\TrafficLogger::logPageview();
         }
 
         // Prepare and return response
