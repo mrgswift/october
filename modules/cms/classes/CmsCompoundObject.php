@@ -271,7 +271,7 @@ class CmsCompoundObject extends CmsObject
             $objectComponentMap = self::$objectComponentPropertyMap;
         }
         else {
-            $cached = Cache::get($key, false);
+            $cached = Cache::memo()->get($key, false);
             $unserialized = $cached ? @unserialize(@base64_decode($cached)) : false;
             $objectComponentMap = $unserialized ?: [];
             if ($objectComponentMap) {
