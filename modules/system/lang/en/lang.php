@@ -116,7 +116,7 @@
     'name' => 'System',
     'menu_label' => 'System',
     'categories' => [
-      'cms' => 'CMS',
+      'cms' => 'Frontend',
       'misc' => 'Misc',
       'logs' => 'Logs',
       'mail' => 'Mail',
