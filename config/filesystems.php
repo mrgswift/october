@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,6 +34,7 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
             'throw' => false,
+            'report' => false,
         ],
 
         'uploads' => [
@@ -42,6 +43,7 @@ return [
             'url' => '/storage/app/uploads',
             'visibility' => 'public',
             'throw' => false,
+            'report' => false,
         ],
 
         'media' => [
@@ -50,6 +52,7 @@ return [
             'url' => '/storage/app/media',
             'visibility' => 'public',
             'throw' => false,
+            'report' => false,
         ],
 
         'resources' => [
@@ -58,6 +61,7 @@ return [
             'url' => '/storage/app/resources',
             'visibility' => 'public',
             'throw' => false,
+            'report' => false,
         ],
 
         's3' => [
@@ -70,6 +74,7 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
+            'report' => false,
         ],
 
     ],
