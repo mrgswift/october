@@ -201,7 +201,7 @@ class ResizeImages
         }
 
         // Cache remote storage results for performance increase
-        $result = Cache::remember($this->getExistsCacheKey($filePath), now()->addDays(30), function() use ($disk, $filePath) {
+        $result = Cache::memo()->remember($this->getExistsCacheKey($filePath), now()->addDays(30), function() use ($disk, $filePath) {
             return $disk->exists($filePath);
         });
 
@@ -292,7 +292,7 @@ class ResizeImages
     {
         $cacheKey = 'resizer.'.$cacheKey;
 
-        if (Cache::has($cacheKey)) {
+        if (Cache::memo()->has($cacheKey)) {
             return false;
         }
 
@@ -312,7 +312,7 @@ class ResizeImages
     {
         $cacheKey = 'resizer.'.$cacheKey;
 
-        if ($cache = Cache::get($cacheKey)) {
+        if ($cache = Cache::memo()->get($cacheKey)) {
             return @unserialize(@base64_decode($cache));
         }
 
@@ -359,7 +359,7 @@ class ResizeImages
     {
         $index = [];
 
-        if ($cache = Cache::get('resizer.index')) {
+        if ($cache = Cache::memo()->get('resizer.index')) {
             $index = (array) @unserialize(@base64_decode($cache)) ?: [];
         }
 

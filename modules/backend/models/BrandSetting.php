@@ -144,7 +144,7 @@ class BrandSetting extends SettingModel
     {
         $cacheKey = self::instance()->cacheKey . '.favicon';
 
-        return Cache::rememberForever($cacheKey, function() {
+        return Cache::memo()->rememberForever($cacheKey, function() {
             $settings = self::instance();
 
             if ($settings->favicon) {
@@ -176,7 +176,7 @@ class BrandSetting extends SettingModel
     {
         $cacheKey = self::instance()->cacheKey . '.menu_logo';
 
-        return Cache::rememberForever($cacheKey, function() {
+        return Cache::memo()->rememberForever($cacheKey, function() {
             $settings = self::instance();
 
             if ($settings->menu_logo) {
@@ -194,7 +194,7 @@ class BrandSetting extends SettingModel
     {
         $cacheKey = self::instance()->cacheKey . '.dashboard_icon';
 
-        return Cache::rememberForever($cacheKey, function() {
+        return Cache::memo()->rememberForever($cacheKey, function() {
             $settings = self::instance();
 
             if ($settings->dashboard_icon) {
@@ -250,7 +250,7 @@ class BrandSetting extends SettingModel
         try {
             $cacheKey = self::instance()->cacheKey . '.stylesheet';
 
-            $customCss = Cache::rememberForever($cacheKey, function() {
+            $customCss = Cache::memo()->rememberForever($cacheKey, function() {
                 return self::compileCss() ?: '';
             });
         }

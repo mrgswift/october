@@ -94,7 +94,7 @@ class MailBrandSetting extends SettingModel
     {
         $cacheKey = self::instance()->cacheKey;
 
-        if ($cache = Cache::get($cacheKey)) {
+        if ($cache = Cache::memo()->get($cacheKey)) {
             return $cache;
         }
 

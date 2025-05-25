@@ -652,7 +652,7 @@ class CombineAssets
     {
         $cacheKey = 'combiner.'.$cacheKey;
 
-        if (Cache::has($cacheKey)) {
+        if (Cache::memo()->has($cacheKey)) {
             return false;
         }
 
@@ -672,7 +672,7 @@ class CombineAssets
     {
         $cacheKey = 'combiner.'.$cacheKey;
 
-        if ($cache = Cache::get($cacheKey)) {
+        if ($cache = Cache::memo()->get($cacheKey)) {
             return @unserialize(@base64_decode($cache));
         }
 
@@ -740,7 +740,7 @@ class CombineAssets
     {
         $index = [];
 
-        if ($cache = Cache::get('combiner.index')) {
+        if ($cache = Cache::memo()->get('combiner.index')) {
             $index = (array) @unserialize(@base64_decode($cache)) ?: [];
         }
 
