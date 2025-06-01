@@ -10,7 +10,7 @@ use Cms\Classes\ThemeManager;
 use System\Classes\UpdateManager;
 use System\Models\PluginVersion;
 use System\Classes\PluginManager;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use Backend\Classes\WidgetBase;
 use System\Helpers\Cache as CacheHelper;
 use ApplicationException;

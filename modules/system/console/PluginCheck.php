@@ -2,7 +2,7 @@
 
 use System as SystemHelper;
 use System\Helpers\Cache as CacheHelper;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Console\Command;
 

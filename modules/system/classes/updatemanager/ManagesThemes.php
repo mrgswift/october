@@ -5,7 +5,7 @@ use System;
 use System as SystemHelper;
 use Cms\Models\ThemeSeed;
 use Cms\Classes\Theme as CmsTheme;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use October\Rain\Filesystem\Zip;
 use ApplicationException;
 

@@ -7,7 +7,7 @@ use Yaml;
 use File;
 use System;
 use Cms\Classes\Theme as CmsTheme;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use ApplicationException;
 use Exception;
 

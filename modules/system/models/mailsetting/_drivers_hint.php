@@ -5,7 +5,7 @@ if (System\Classes\PluginManager::instance()->hasPlugin('October.Drivers')) {
     $showHint = false;
 }
 else {
-    $composer = \October\Rain\Composer\Manager::instance();
+    $composer = \October\Rain\Composer\ComposerManager::instance();
     if (
         $composer->hasPackage('aws-sdk-php') ||
         $composer->hasPackage('symfony/mailgun-mailer') ||

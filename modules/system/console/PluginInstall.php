@@ -4,7 +4,7 @@ use System;
 use Illuminate\Console\Command;
 use System\Classes\UpdateManager;
 use System\Helpers\Cache as CacheHelper;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Exception;

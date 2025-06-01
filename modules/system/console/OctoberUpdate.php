@@ -3,7 +3,7 @@
 use Illuminate\Console\Command;
 use System\Helpers\Cache as CacheHelper;
 use System\Classes\UpdateManager;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use Exception;
 
 /**

@@ -6,7 +6,7 @@ use Http;
 use Event;
 use System as SystemHelper;
 use System\Models\Parameter;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use ApplicationException;
 use SystemException;
 use Exception;

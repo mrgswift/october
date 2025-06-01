@@ -1,7 +1,7 @@
 <?php namespace System\Classes\UpdateManager;
 
 use Lang;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use ApplicationException;
 
 /**

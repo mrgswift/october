@@ -12,7 +12,7 @@ use System\Classes\SettingsManager;
 use System\Widgets\Changelog;
 use System\Widgets\Updater;
 use Backend\Classes\Controller;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use ValidationException;
 use Exception;
 

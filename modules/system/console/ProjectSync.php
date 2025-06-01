@@ -2,7 +2,7 @@
 
 use System;
 use System\Classes\UpdateManager;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use Illuminate\Console\Command;
 use Exception;
 

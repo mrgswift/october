@@ -9,7 +9,7 @@ use Config;
 use Schema;
 use System;
 use Manifest;
-use October\Rain\Composer\Manager as ComposerManager;
+use October\Rain\Composer\ComposerManager;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
 use SystemException;
