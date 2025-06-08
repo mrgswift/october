@@ -5,6 +5,7 @@ use Event;
 use Config;
 use Cookie;
 use Request;
+use Dashboard\Models\DashboardSetting;
 use Dashboard\Models\TrafficStatisticsPageview;
 use SystemException;
 use Carbon\Carbon;
@@ -23,7 +24,7 @@ class TrafficLogger
      */
     public static function isEnabled(): bool
     {
-        return (bool) Config::get('cms.internal_traffic_statistics.enabled', true);
+        return (bool) DashboardSetting::instance()->traffic_stats_enabled;
     }
 
     /**
@@ -33,7 +34,7 @@ class TrafficLogger
      */
     public static function getTimezone(): string
     {
-        $result = Config::get('cms.internal_traffic_statistics.timezone');
+        $result = DashboardSetting::instance()->traffic_stats_timezone;
 
         if (!$result) {
             $result = Config::get('cms.timezone');
@@ -48,13 +49,10 @@ class TrafficLogger
      */
     public static function getRetentionMonths(): ?int
     {
-        $retention = Config::get('cms.internal_traffic_statistics.retention');
-        if (strlen($retention)) {
-            if (!is_int($retention)) {
-                throw new SystemException('cms.internal_traffic_statistics.retention must be a number or null');
-            }
+        $retention = DashboardSetting::instance()->traffic_stats_retention;
 
-            return $retention;
+        if (strlen($retention) && is_int($retention)) {
+            return (int) $retention;
         }
 
         return null;
@@ -94,7 +92,7 @@ class TrafficLogger
 
         $evDateTime = self::makeEventDateTime();
 
-        $pageview = new TrafficStatisticsPageview();
+        $pageview = new TrafficStatisticsPageview;
         $pageview->user_authenticated = self::isUserAuthenticated();
         $pageview->ev_datetime = $evDateTime->toDateTimeString();
         $pageview->ev_date = $evDateTime->toDateString();

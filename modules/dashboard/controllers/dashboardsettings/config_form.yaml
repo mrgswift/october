@@ -6,10 +6,10 @@
 name: "Dashboard Settings"
 
 # Fields are defined by extension
-form: ~/modules/dashboard/models/dashsetting/fields.yaml
+form: ~/modules/dashboard/models/dashboardsetting/fields.yaml
 
 # Model Class name
-modelClass: Dashboard\Models\DashSetting
+modelClass: Dashboard\Models\DashboardSetting
 
 # Default redirect location
 defaultRedirect: system/settings

@@ -21,9 +21,11 @@ tabs:
             type: dropdown
             comment: Timezone to log pageviews in. Changing the timezone won't update the existing data. If you change the timezone without erasing the existing data, reports can potentially display incorrect times for previously logged days.
             tab: Traffic Statistics
+            span: auto
 
         traffic_stats_retention:
             label: Retention Period (Months)
             comment: Determines the duration for which traffic statistics data should be stored in the database. When the set period expires, the corresponding data is automatically purged from the database. Set to 0 or empty to retain records forever.
             tab: Traffic Statistics
             type: number
+            span: auto

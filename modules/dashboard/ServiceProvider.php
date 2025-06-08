@@ -100,7 +100,7 @@ class ServiceProvider extends ModuleServiceProvider
                 'description' => 'dashboard::lang.internal_traffic_statistics.permission_description',
                 'category' => SettingsManager::CATEGORY_CMS,
                 'icon' => 'icon-line-chart',
-                'url' => Backend::url('dashboard/dashsettings'),
+                'url' => Backend::url('dashboard/dashboardsettings'),
                 'permissions' => ['cms.internal_traffic_statistics'],
                 'order' => 1000
             ],

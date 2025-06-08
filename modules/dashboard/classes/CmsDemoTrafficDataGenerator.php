@@ -18,7 +18,7 @@ class CmsDemoTrafficDataGenerator
      */
     public static function instance(): static
     {
-        return App::make('cms.demos.traffic');
+        return App::make('dashboard.demos.traffic');
     }
 
     /**
