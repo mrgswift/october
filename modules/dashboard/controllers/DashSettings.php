@@ -5,15 +5,33 @@ use Flash;
 use Backend\Classes\SettingsController;
 use Dashboard\Models\TrafficStatisticsPageview;
 use Dashboard\Classes\TrafficLogger;
+use Dashboard\Models\DashSetting;
 
 /**
- * Internal Traffic Statistics settings controller
+ * DashSettings controller
+ *
+ * @todo these items need to be retrofitted
+ * - internal_traffic_statistics_enabled / cms.internal_traffic_statistics.enabled
+ * - internal_traffic_statistics_timezone / cms.internal_traffic_statistics.timezone
+ * - internal_traffic_statistics_retention / cms.internal_traffic_statistics.retention
  *
  * @package october\dashboard
  * @author Alexey Bobkov, Samuel Georges
  */
-class InternalTrafficStatisticsSettings extends SettingsController
+class DashSettings extends SettingsController
 {
+    /**
+     * @var array Extensions implemented by this controller.
+     */
+    public $implement = [
+        \Backend\Behaviors\FormController::class,
+    ];
+
+    /**
+     * @var array `FormController` configuration.
+     */
+    public $formConfig = 'config_form.yaml';
+
     /**
      * @var array requiredPermissions required to view this page.
      */
@@ -22,17 +40,7 @@ class InternalTrafficStatisticsSettings extends SettingsController
     /**
      * @var string settingsItemCode determines the settings code
      */
-    public $settingsItemCode = 'internal_traffic_statistics';
-
-    /**
-     * __construct
-     */
-    public function __construct()
-    {
-        $this->addCss('/modules/system/assets/css/settings/settings.css', 'global');
-
-        parent::__construct();
-    }
+    public $settingsItemCode = 'dash_settings';
 
     /**
      * index
@@ -57,6 +65,16 @@ class InternalTrafficStatisticsSettings extends SettingsController
 
             $this->vars['retention'] = $retention;
         }
+
+        $this->create();
+    }
+
+    /**
+     * index_onSave
+     */
+    public function index_onSave()
+    {
+        return $this->create_onSave();
     }
 
     /**
@@ -67,5 +85,13 @@ class InternalTrafficStatisticsSettings extends SettingsController
         TrafficStatisticsPageview::purgeAllRecords();
 
         Flash::success(Lang::get('dashboard::lang.internal_traffic_statistics.purge_success'));
+    }
+
+    /**
+     * formFindModelObject always returns the dash setting instance
+     */
+    public function formFindModelObject($recordId)
+    {
+        return DashSetting::instance();
     }
 }

@@ -1,5 +1,6 @@
 <?php namespace Dashboard\Classes;
 
+use Backend\Classes\VueComponentBase;
 use Carbon\Carbon;
 use SystemException;
 

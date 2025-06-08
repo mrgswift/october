@@ -95,12 +95,12 @@ class ServiceProvider extends ModuleServiceProvider
     public function registerSettings()
     {
         return [
-            'internal_traffic_statistics' => [
+            'dash_settings' => [
                 'label' => 'dashboard::lang.internal_traffic_statistics.label',
                 'description' => 'dashboard::lang.internal_traffic_statistics.permission_description',
                 'category' => SettingsManager::CATEGORY_CMS,
                 'icon' => 'icon-line-chart',
-                'url' => Backend::url('dashboard/internaltrafficstatisticssettings'),
+                'url' => Backend::url('dashboard/dashsettings'),
                 'permissions' => ['cms.internal_traffic_statistics'],
                 'order' => 1000
             ],
