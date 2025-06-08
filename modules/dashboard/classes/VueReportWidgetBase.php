@@ -1,7 +1,7 @@
 <?php namespace Dashboard\Classes;
 
 use Backend\Classes\VueComponentBase;
-use Carbon\Carbon;
+use Dashboard\Classes\ReportFetchData;
 use SystemException;
 
 /**
@@ -58,16 +58,7 @@ abstract class VueReportWidgetBase extends VueComponentBase
     /**
      * getData
      */
-    abstract public function getData(
-        array $widgetConfig,
-        ?Carbon $dateStart,
-        ?Carbon $dateEnd,
-        ?int $startTimestamp,
-        ?Carbon $compareDateStart,
-        ?Carbon $compareDateEnd,
-        ?string $aggregationInterval,
-        array $extraData
-    ): mixed;
+    abstract public function getData(ReportFetchData $data): mixed;
 
     /**
      * runHandler

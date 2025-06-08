@@ -57,7 +57,7 @@ class Dashboards extends Controller
 
         $this->bodyClass = 'compact-container sidenav-responsive';
 
-        $this->vars['dashboards'] = Dashboard::listDashboards(\Backend\Controllers\Index::class);
+        $this->vars['dashboards'] = Dashboard::listDashboards(\Dashboard\Controllers\Index::class);
     }
 
     /**
@@ -66,7 +66,7 @@ class Dashboards extends Controller
     public function formBeforeSave($model)
     {
         $model->is_custom = 1;
-        $model->owner_type = \Backend\Controllers\Index::class;
+        $model->owner_type = \Dashboard\Controllers\Index::class;
 
         if ($model->owner_field) {
             $model->code = $model->owner_field;

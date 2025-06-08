@@ -11,7 +11,7 @@
                             $isActive = $dashboard && $dashboard->code == $item->code;
                         ?>
                         <li class="mainmenu-item <?= $isActive ? 'active' : '' ?>">
-                            <a href="<?= Backend::url('backend/index/'. e($item->code)) ?>">
+                            <a href="<?= Backend::url('dashboard/index/'. e($item->code)) ?>">
                                 <span class="nav-icon">
                                     <i class="<?= e($item->icon) ?>"></i>
                                 </span>

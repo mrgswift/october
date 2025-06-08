@@ -23,7 +23,6 @@ trait HasWidgetData
 
         $dataSource = $this->getRequestedDataSource(post('widget_config'));
         $fetchDataResult = $dataSource->getData($fetchData);
-
         // $fetchDataResult = $dataSource->getData(
         //     $dimensionCode,
         //     $metricCodes,
@@ -96,43 +95,34 @@ trait HasWidgetData
      */
     public function onGetWidgetCustomData()
     {
-        $controller = $this->controller;
-        $widgetConfig = post('widget_config');
-        $dashboardDateStart = post('date_start');
-        $dashboardDateEnd = post('date_end');
-        $aggregationInterval = post('aggregation_interval');
-        $resetCache = (bool) post('reset_cache');
-        $extraData = post('extra_data', []);
-        $compare = post('compare');
+        $fetchData = new ReportFetchData;
+        $fetchData->fillFromPost();
 
-        [$dateStart, $dateEnd, $startTimestamp] = $this->getRequestedDateInterval(
-            $widgetConfig,
-            $dashboardDateStart,
-            $dashboardDateEnd
-        );
-
-        [$compareDateStart, $compareDateEnd] = $this->getRequestedCompareInterval($dateStart, $dateEnd, $compare);
-
-        $widgetClass = $widgetConfig['widgetClass'];
+        $widgetClass = post('widget_config[widgetClass]');
         if (!$widgetClass) {
             throw new SystemException("Custom widget class [{$widgetClass}] is not set.");
         }
 
-        $widget = DashManager::instance()->getVueReportWidget($widgetClass, $controller);
+        $widget = DashManager::instance()->getVueReportWidget(
+            $widgetClass,
+            $this->controller
+        );
+
         if (!$widget) {
             throw new SystemException("Widget class [{$widgetClass}] not registered.");
         }
 
-        $data = $widget->getData(
-            $widgetConfig,
-            $dateStart,
-            $dateEnd,
-            $startTimestamp,
-            $compareDateStart,
-            $compareDateEnd,
-            $aggregationInterval,
-            $extraData
-        );
+        $data = $widget->getData($fetchData);
+        // $data = $widget->getData(
+        //     $widgetConfig,
+        //     $dateStart,
+        //     $dateEnd,
+        //     $startTimestamp,
+        //     $compareDateStart,
+        //     $compareDateEnd,
+        //     $aggregationInterval,
+        //     $extraData
+        // );
 
         return [
             'data' => $data

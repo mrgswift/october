@@ -310,7 +310,12 @@ class ReportFetchData
      */
     protected function getRequestedMetricsConfiguration(): array
     {
+        if (!$this->metricCodes) {
+            return [];
+        }
+
         $result = [];
+
         foreach ($this->metricCodes as $metricCode) {
             $result[$metricCode] = $this->findMetricInWidgetConfig($metricCode, $this->widgetConfig);
         }

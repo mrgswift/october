@@ -19,7 +19,7 @@
             @click.stop="onContextMenu($event)"
             @keyup.enter="onContextMenu($event)"
         >
-            <img src="<?= Url::asset('/modules/backend/assets/images/dashboard/edit-dots.svg') ?>"/>
+            <img src="<?= Url::asset('/modules/dashboard/assets/images/dashboard/edit-dots.svg') ?>"/>
         </div>
 
         <backend-component-dropdownmenu
