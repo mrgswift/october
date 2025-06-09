@@ -78,7 +78,8 @@ tabs:
             options:
                 color: Flat Color
                 wallpaper: Wallpaper
-                october_ai_images: October CMS AI Generated Images
+                gradient: Gradient
+                ai_images: AI Generated Images
             span: left
 
         login_background_color:

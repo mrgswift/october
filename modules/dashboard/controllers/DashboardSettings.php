@@ -53,24 +53,7 @@ class DashboardSettings extends SettingsController
         $this->pageTitle = 'dashboard::lang.internal_traffic_statistics.label';
         $this->pageSize = Backend::sizeToPixels('large') ?: null;
 
-        // $enabled = TrafficLogger::isEnabled();
-        // $this->vars['featureEnabled'] = $enabled;
-
-        // if ($enabled) {
-        //     $this->vars['timezone'] = TrafficLogger::getTimezone();
-
-        //     $retention = TrafficLogger::getRetentionMonths();
-        //     if (!strlen($retention)) {
-        //         $retention = Lang::get('dashboard::lang.internal_traffic_statistics.retention_indefinite');
-        //     }
-        //     else {
-        //         $retention = Lang::get('dashboard::lang.internal_traffic_statistics.retention_mon', ['retention'=>$retention]);
-        //     }
-
-        //     $this->vars['retention'] = $retention;
-        // }
-
-        $this->vars['recordsTotal'] = Str::abbreviateNumber(TrafficStatisticsPageview::count());
+        $this->vars['recordsTotal'] = Str::shortNumber(TrafficStatisticsPageview::count());
 
         $this->update();
     }

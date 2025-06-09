@@ -27,7 +27,7 @@ Vue.component('dashboard-component-dashboard-widget-static', {
         },
 
         getSettingsConfiguration: function () {
-            return this.loadedValue.properties;
+            return this.loadedValue && this.loadedValue.properties;
         }
     },
     template: '#dashboard_vuecomponents_dashboard_widget_static'

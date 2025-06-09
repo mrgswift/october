@@ -53,7 +53,7 @@
             $defaultImage1x = $customizationVars->defaultImage1x;
             $defaultImage2x = $customizationVars->defaultImage2x;
 
-            if ($loginBackgroundType === 'october_ai_images') {
+            if ($loginBackgroundType === 'ai_images') {
                 $aiImageIndex = rand(0, 8);
                 $generatedImageData = Backend\Classes\LoginCustomization::getGeneratedImageData();
             }
@@ -74,30 +74,39 @@
                     </div>
                 </div>
 
-                <div class="outer-theme-cell flex-grow-1" <?php if ($loginBackgroundType === 'october_ai_images'): ?>style="<?= e($generatedImageData->background)  ?>"<?php endif?>>
+                <div
+                    class="outer-theme-cell flex-grow-1"
+                    <?php if ($loginBackgroundType === 'ai_images'): ?>style="<?= e($generatedImageData->background) ?>"<?php endif ?>
+                >
                     <div class="d-flex h-100 flex-column align-items-center justify-content-center">
-                    <?php if ($loginBackgroundType === 'october_ai_images'): ?>
-                        <img
-                            width="512"
-                            height="512"
-                            src="<?= Url::asset('/modules/backend/assets/images/october-login-ai-generated/'.$generatedImageData->img) ?>"
-                            alt=""
-                        />
-                    <?php else: ?>
-                        <?php if ($loginCustomization->loginImageType == 'autumn_images'): ?>
+                        <?php if ($loginBackgroundType === 'gradient'): ?>
+                            <link href="<?= Backend::skinAsset('assets/images/october-login-gradients/1.css') . '?v=' . $coreBuild ?>" rel="stylesheet" />
+                            <div class="gradient-background">
+                                <div class="blob blob1"></div>
+                                <div class="blob blob2"></div>
+                            </div>
+                        <?php elseif ($loginBackgroundType === 'ai_images'): ?>
                             <img
-                                src="<?= Url::asset('/modules/backend/assets/images/october-login-theme/'.$defaultImage1x) ?>"
-                                srcset="<?= Url::asset('/modules/backend/assets/images/october-login-theme/'.$defaultImage1x) ?>,
-                                <?= Url::asset('/modules/backend/assets/images/october-login-theme/'.$defaultImage2x) ?> 2x"
+                                width="512"
+                                height="512"
+                                src="<?= Url::asset('/modules/backend/assets/images/october-login-ai-generated/'.$generatedImageData->img) ?>"
                                 alt=""
                             />
-                        <?php elseif ($loginCustomization->loginCustomImage): ?>
-                            <img
-                                src="<?= e($loginCustomization->loginCustomImage) ?>"
-                                alt=""
-                            />
+                        <?php else: ?>
+                            <?php if ($loginCustomization->loginImageType == 'autumn_images'): ?>
+                                <img
+                                    src="<?= Url::asset('/modules/backend/assets/images/october-login-theme/'.$defaultImage1x) ?>"
+                                    srcset="<?= Url::asset('/modules/backend/assets/images/october-login-theme/'.$defaultImage1x) ?>,
+                                    <?= Url::asset('/modules/backend/assets/images/october-login-theme/'.$defaultImage2x) ?> 2x"
+                                    alt=""
+                                />
+                            <?php elseif ($loginCustomization->loginCustomImage): ?>
+                                <img
+                                    src="<?= e($loginCustomization->loginCustomImage) ?>"
+                                    alt=""
+                                />
+                            <?php endif ?>
                         <?php endif ?>
-                    <?php endif ?>
                     </div>
                 </div>
             </div>

@@ -61,7 +61,7 @@ class BrandSetting extends SettingModel
 
     const DEFAULT_PALETTE_COLOR = 'default';
     const DEFAULT_LOGIN_COLOR = '#fef6eb';
-    const DEFAULT_LOGIN_BG_TYPE = 'october_ai_images';
+    const DEFAULT_LOGIN_BG_TYPE = 'gradient';
     const DEFAULT_LOGIN_IMG_TYPE = 'autumn_images';
     const DEFAULT_WALLPAPER_SIZE = 'auto';
 
