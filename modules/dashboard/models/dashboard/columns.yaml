@@ -12,5 +12,5 @@ columns:
         sortable: false
         type: linkage
         linkText: View
-        linkUrl: backend/index/:code
+        linkUrl: dashboard/index/:code
         align: right
