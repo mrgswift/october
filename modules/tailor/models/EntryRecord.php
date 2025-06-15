@@ -357,7 +357,7 @@ class EntryRecord extends BlueprintModel
      */
     public function getMorphClass()
     {
-        return parent::getMorphClass() . '@' . $this->getTable();
+        return self::class . '@' . $this->getTable();
     }
 
     /**
