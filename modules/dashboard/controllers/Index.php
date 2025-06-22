@@ -64,7 +64,7 @@ class Index extends WildcardController
         }
 
         // Reverse the BackendController::parseAction
-        $otherCode = kebab_case(camel_case($code));
+        $otherCode = kebab_case(camel_case((string) $code));
 
         $this->bodyClass = 'compact-container sidenav-responsive';
         $this->pageTitle = 'backend::lang.dashboard.menu_label';

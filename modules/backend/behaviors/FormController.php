@@ -524,8 +524,8 @@ class FormController extends ControllerBehavior
         }
 
         // Sections provided by the behavior, then use the widget as fallback
-        $section = $options['section'] ?? null;
-        switch (strtolower($section)) {
+        $section = strtolower($options['section'] ?? '');
+        switch ($section) {
             case 'buttons':
                 return $this->formMakePartial($this->isPopupDesign() ? 'popup_buttons' : 'buttons');
         }
