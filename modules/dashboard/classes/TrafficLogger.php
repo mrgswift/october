@@ -105,13 +105,10 @@ class TrafficLogger
 
         $pageview->client_id = $clientId;
         $pageview->first_time_visit = $firstTimeVisit;
-        $pageview->user_agent = Str::substr(Request::header('User-Agent'), 0, 255);
-        $pageview->ip = Str::substr(Request::ip(), 0, 255);
-        $pageview->page_path = Str::substr(Request::path(), 0, 255);
-        $pageview->referral_domain = Str::substr(parse_url(
-            $referrer,
-            PHP_URL_HOST
-        ), 0, 255);
+        $pageview->user_agent = Str::substr((string) Request::header('User-Agent'), 0, 255);
+        $pageview->ip = Str::substr((string) Request::ip(), 0, 255);
+        $pageview->page_path = Str::substr((string) Request::path(), 0, 255);
+        $pageview->referral_domain = Str::substr((string) parse_url($referrer ?: '', PHP_URL_HOST), 0, 255);
         $pageview->ev_timestamp = gmdate('Y-m-d H:i:s', time());
         $pageview->save();
 
