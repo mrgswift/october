@@ -159,6 +159,7 @@ trait HasWidgetData
      */
     protected function getWidgetPropertiesForBrowser($widget): array
     {
+        $result = [];
         $properties = $widget->defineProperties();
 
         foreach ($properties as $name => $params) {

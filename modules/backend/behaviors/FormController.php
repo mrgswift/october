@@ -36,7 +36,7 @@ use Exception;
  * values as either a YAML file, located in the controller view directory,
  * or directly as a PHP array.
  *
- * @see https://docs.octobercms.com/3.x/extend/forms/form-controller.html Form Controller Documentation
+ * @see https://docs.octobercms.com/4.x/extend/forms/form-controller.html Form Controller Documentation
  * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
@@ -865,7 +865,7 @@ class FormController extends ControllerBehavior
     /**
      * extendFormFields is a static helper for extending form fields
      * @deprecated for best performance, use Event class directly, see docs
-     * @link https://docs.octobercms.com/3.x/extend/forms/form-controller.html#extending-form-fields
+     * @link https://docs.octobercms.com/4.x/extend/forms/form-controller.html#extending-form-fields
      */
     public static function extendFormFields($callback)
     {

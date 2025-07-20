@@ -26,7 +26,7 @@ use ApplicationException;
  * values as either a YAML file, located in the controller view directory,
  * or directly as a PHP array.
  *
- * @see https://docs.octobercms.com/3.x/extend/forms/relation-controller.html Relation Controller Documentation
+ * @see https://docs.octobercms.com/4.x/extend/forms/relation-controller.html Relation Controller Documentation
  * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
