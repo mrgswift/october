@@ -90,13 +90,18 @@ class UserRoles extends SettingsController
             return;
         }
 
-        $comparaison = $this->verifyStrictRoles() ? '>' : '>=';
-
-        $query->where('sort_order', $comparaison, $userRole->sort_order);
+        $query->where(
+            'sort_order',
+            $this->allowPeerManagement() ? '>=' : '>',
+            $userRole->sort_order
+        );
     }
 
-    public function verifyStrictRoles(): bool
+    /**
+     * allowPeerManagement returns true if users can manage other peers
+     */
+    public function allowPeerManagement(): bool
     {
-        return Config::get('backend.strict_role_hierarchy', true);
+        return Config::get('backend.user_peer_management', false);
     }
 }

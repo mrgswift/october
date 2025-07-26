@@ -60,7 +60,7 @@ tabs:
         smtp_timeout:
             label: SMTP Timeout
             type: number
-            comment: 'Connection timeout in seconds (default: 30)'
+            comment: "Connection timeout in seconds (default: 30)"
             tab: General
             span: auto
             default: 30

@@ -158,17 +158,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Strict Role hierarchy
+    | Peer Management
     |--------------------------------------------------------------------------
     |
-    | Defines if the backend should enforce a strict role hierarchy.
+    | When enabled, admin users can manage other users at the same role level
+    | in addition to their users below their role (direct reports).
     |
-    | If set to false, users with the 'admins.manage' permission will be able
-    | to see and manage users with the same role
+    | When disabled, users can only manage their direct reports and not peers.
     |
     */
 
-    'strict_role_hierarchy' => true,
+    'user_peer_management' => false,
 
     /*
     |--------------------------------------------------------------------------
