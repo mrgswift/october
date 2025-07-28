@@ -180,9 +180,9 @@ class Users extends SettingsController
         if (
             !$this->user->isSuperUser() &&
             ($role = UserRole::find(post('User[role]'))) &&
-            $this->allowPeerManagement()
+            ($this->allowPeerManagement()
                 ? $role->sort_order <= $this->user->role->sort_order
-                : $role->sort_order < $this->user->role->sort_order
+                : $role->sort_order < $this->user->role->sort_order)
         ) {
             throw new ForbiddenException;
         }
