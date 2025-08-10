@@ -190,12 +190,14 @@ trait HasWidgetData
     {
         $widgetConfig = (array) post('widget_config');
 
-        if ($reportName = $widgetConfig['reportName'] ?? null) {
-            $widget = $this->getReportWidget($reportName);
-        }
-        else {
+        $reportName = $widgetConfig['reportName']
+            ?? 'custom_report_'.post('_unique_key', Str::random());
+
+        $widget = $this->getReportWidget($reportName);
+
+        if (!$widget) {
             $widget = $this->makeDashReportWidget(new DashReport([
-                'reportName' => 'widget'.Str::random()
+                'reportName' => $reportName
             ] + $widgetConfig));
         }
 

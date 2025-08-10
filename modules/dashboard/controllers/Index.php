@@ -131,6 +131,11 @@ class Index extends WildcardController
         // Transfer dynamic config
         foreach ($allDashboards as $code => $dashboard) {
             $config->$code['name'] = $dashboard->name;
+
+            if ($dashboard->definition) {
+                $config->$code['reports'] = $dashboard->definition;
+                $config->$code['isCustom'] = true;
+            }
         }
 
         return $config;

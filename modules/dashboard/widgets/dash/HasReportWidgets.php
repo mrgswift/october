@@ -34,7 +34,7 @@ trait HasReportWidgets
      */
     protected function makeDashReportWidget(DashReport $report)
     {
-        if ($report->type !== 'widget' && $report->type !== 'static') {
+        if (!in_array($report->type, ['static', 'widget'])) {
             return null;
         }
 
@@ -65,7 +65,8 @@ trait HasReportWidgets
      */
     protected function isReportWidget(string $reportType): bool
     {
-        if (!$reportType) {
+        // Types static and widget are reserved
+        if (!$reportType || in_array($reportType, ['static', 'widget'])) {
             return false;
         }
 

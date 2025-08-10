@@ -25,10 +25,45 @@ trait ReportProcessor
     }
 
     /**
+     * processDashWidgetReports processes dash widgets from flexible source (yaml or custom)
+     */
+    protected function processDashWidgetReports(array $reports)
+    {
+        if ($this->isCustom) {
+            $this->processDashWidgetReportsFromCustomData($reports);
+        }
+        else {
+            $this->processDashWidgetReportsFromYaml($reports);
+        }
+    }
+
+    /**
+     * processDashWidgetReportsFromCustom locates dash widgets from a custom data source
+     */
+    protected function processDashWidgetReportsFromCustomData(array $reports)
+    {
+        foreach ($reports as $report) {
+            if ($this->isReportWidget((string) $report->type)) {
+                continue;
+            }
+
+            $newConfig = [
+                'label' => $report->configuration['title'] ?? null,
+                ...(array) $report->configuration
+            ];
+
+            $report->useConfig($newConfig);
+
+            // Create form widget instance and bind to controller
+            $this->makeDashReportWidget($report)->bindToController();
+        }
+    }
+
+    /**
      * processDashWidgetReports will mutate reports types that are registered as widgets,
      * convert their type to 'widget' and internally allocate the widget object
      */
-    protected function processDashWidgetReports(array $reports)
+    protected function processDashWidgetReportsFromYaml(array $reports)
     {
         foreach ($reports as $report) {
             if (!$this->isReportWidget((string) $report->type)) {
@@ -83,19 +118,27 @@ trait ReportProcessor
     }
 
     /**
-     * processSavedDashRows
+     * processCustomDataDashRows
      */
-    protected function processSavedDashRows(array $reports)
+    protected function processCustomDataDashRows(array $reports)
     {
-        // @todo check if dash can be customized
+        // @todo check if dash can be customized, if this is actually
+        // enabled and allowed i.e not a static dash
 
-        $savedDash = DashboardModel::fetchDashboard(
-            $this->controller,
-            $this->code
-        );
+        // Supplied report data is flagged as custom
+        if ($this->isCustom) {
+            $this->allRows = $this->reports;
+        }
+        // Lookup a saved dash from the generic model store
+        else {
+            $savedDash = DashboardModel::fetchDashboard(
+                $this->controller,
+                $this->code
+            );
 
-        if ($savedDash && $savedDash->definition) {
-            $this->allRows = $savedDash->definition;
+            if ($savedDash && $savedDash->definition) {
+                $this->allRows = $savedDash->definition;
+            }
         }
     }
 
