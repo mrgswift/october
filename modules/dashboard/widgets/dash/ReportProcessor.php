@@ -66,7 +66,11 @@ trait ReportProcessor
     protected function processDashWidgetReportsFromYaml(array $reports)
     {
         foreach ($reports as $report) {
-            if (!$this->isReportWidget((string) $report->type)) {
+            // Types static and widget are reserved
+            if (
+                in_array($report->type, ['static', 'widget']) ||
+                !$this->isReportWidget((string) $report->type)
+            ) {
                 continue;
             }
 
