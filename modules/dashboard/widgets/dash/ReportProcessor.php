@@ -43,16 +43,16 @@ trait ReportProcessor
     protected function processDashWidgetReportsFromCustomData(array $reports)
     {
         foreach ($reports as $report) {
-            if ($this->isReportWidget((string) $report->type)) {
-                continue;
-            }
-
             $newConfig = [
                 'label' => $report->configuration['title'] ?? null,
                 ...(array) $report->configuration
             ];
 
             $report->useConfig($newConfig);
+
+            if (!in_array((string) $report->type, ['static', 'widget'])) {
+                continue;
+            }
 
             // Create form widget instance and bind to controller
             $this->makeDashReportWidget($report)->bindToController();
