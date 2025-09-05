@@ -23,9 +23,9 @@
             this.triggerCondition = this.config.triggerCondition;
 
             if (this.config.triggerCondition.indexOf('value') == 0) {
-                var match = this.config.triggerCondition.match(/[^[\]]+(?=])/g);
+                var match = this.config.triggerCondition.match(/\[([^\]]*)\]/g);
                 this.triggerCondition = 'value';
-                this.triggerConditionValue = (match) ? match : [""];
+                this.triggerConditionValue = match ? match.map(m => m.slice(1, -1)) : [""];
             }
 
             this.conditionValid = this.triggerCondition == 'checked' ||
