@@ -121,7 +121,13 @@
                 trigger.each(function() {
                     var triggerValue = $(this).val();
 
-                    $.each(Array.isArray(triggerValue) ? triggerValue : [triggerValue], function(key, val) {
+                    var valueArray = Array.isArray(triggerValue) ? triggerValue : [triggerValue]
+
+                    if(valueArray.length === 0) {
+                        valueArray = [''];
+                    }
+
+                    $.each(valueArray, function(key, val) {
                         triggered = self.matchWildcardConditions(val, self.triggerConditionValue);
                         return !triggered;
                     });
