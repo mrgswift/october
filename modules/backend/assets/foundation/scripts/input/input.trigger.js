@@ -146,6 +146,9 @@
 
         // matchWildcardString matches a value (MyString) to a condition (My*)
         matchWildcardString(value, condition) {
+            if(condition === "*") {
+                return !!value;
+            }
             var escapeRegex = (value) => value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
             return new RegExp("^" + condition.split("*").map(escapeRegex).join(".*") + "$").test(value);
         }
