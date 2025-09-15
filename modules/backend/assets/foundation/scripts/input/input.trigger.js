@@ -119,11 +119,10 @@
 
                 var self = this;
                 trigger.each(function() {
-                    var triggerValue = $(this).val();
+                    var triggerValue = $(this).val(),
+                        valueArray = Array.isArray(triggerValue) ? triggerValue : [triggerValue];
 
-                    var valueArray = Array.isArray(triggerValue) ? triggerValue : [triggerValue]
-
-                    if(valueArray.length === 0) {
+                    if (valueArray.length === 0) {
                         valueArray = [''];
                     }
 

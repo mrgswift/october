@@ -442,7 +442,7 @@ class PluginManager
     public function getPluginNamespace($id): ?string
     {
         if ($classObj = $this->findByIdentifier($id)) {
-            return dirname(get_class($classObj));
+            return implode('\\', explode('\\', get_class($classObj), -1));
         }
 
         return null;
