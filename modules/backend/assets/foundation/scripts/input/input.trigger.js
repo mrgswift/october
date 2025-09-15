@@ -23,9 +23,9 @@
             this.triggerCondition = this.config.triggerCondition;
 
             if (this.config.triggerCondition.indexOf('value') == 0) {
-                var match = this.config.triggerCondition.match(/[^[\]]+(?=])/g);
+                var match = this.config.triggerCondition.match(/\[([^\]]*)\]/g);
                 this.triggerCondition = 'value';
-                this.triggerConditionValue = (match) ? match : [""];
+                this.triggerConditionValue = match ? match.map(m => m.slice(1, -1)) : [""];
             }
 
             this.conditionValid = this.triggerCondition == 'checked' ||
@@ -121,7 +121,13 @@
                 trigger.each(function() {
                     var triggerValue = $(this).val();
 
-                    $.each(Array.isArray(triggerValue) ? triggerValue : [triggerValue], function(key, val) {
+                    var valueArray = Array.isArray(triggerValue) ? triggerValue : [triggerValue]
+
+                    if(valueArray.length === 0) {
+                        valueArray = [''];
+                    }
+
+                    $.each(valueArray, function(key, val) {
                         triggered = self.matchWildcardConditions(val, self.triggerConditionValue);
                         return !triggered;
                     });
@@ -146,6 +152,9 @@
 
         // matchWildcardString matches a value (MyString) to a condition (My*)
         matchWildcardString(value, condition) {
+            if(condition === "*") {
+                return !!value;
+            }
             var escapeRegex = (value) => value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
             return new RegExp("^" + condition.split("*").map(escapeRegex).join(".*") + "$").test(value);
         }
