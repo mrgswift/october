@@ -61,12 +61,14 @@ trait HasComponentHelpers
 
         try {
             $componentObj->init();
-        } catch (Throwable $e) {
-            $this->vars[$alias];
+        }
+        catch (Throwable $e) {
+            unset($this->vars[$alias]);
 
             if ($addToLayout) {
                 unset($this->layout->components[$alias]);
-            } else {
+            }
+            else {
                 unset($this->page->components[$alias]);
             }
 

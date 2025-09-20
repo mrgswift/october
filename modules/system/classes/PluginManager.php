@@ -10,8 +10,8 @@ use Schema;
 use System;
 use Manifest;
 use October\Rain\Composer\ComposerManager;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
+use DirectoryIterator;
+use UnexpectedValueException;
 use SystemException;
 use Throwable;
 
@@ -508,8 +508,9 @@ class PluginManager
 
         // Iterate vendors directly to avoid recursion exceptions on unreadable children
         try {
-            $vendorIterator = new \DirectoryIterator($dirPath);
-        } catch (\UnexpectedValueException $e) {
+            $vendorIterator = new DirectoryIterator($dirPath);
+        }
+        catch (UnexpectedValueException $e) {
             return $plugins;
         }
 
@@ -525,11 +526,11 @@ class PluginManager
             $vendorName = $vendor->getFilename();
             $vendorPath = $vendor->getPathname();
 
-            // Iterate plugins under this vendor
+            // Iterate plugins under this vendor, skip unreadable vendor directories
             try {
-                $pluginIterator = new \DirectoryIterator($vendorPath);
-            } catch (\UnexpectedValueException $e) {
-                // Skip unreadable vendor directories
+                $pluginIterator = new DirectoryIterator($vendorPath);
+            }
+            catch (UnexpectedValueException $e) {
                 continue;
             }
 
