@@ -2,7 +2,7 @@
   'cms_object' => [
     'invalid_file' => 'Nome de arquivo inválido: ":name". Os nomes de arquivos podem conter apenas letras, números, sublinhados, traços e pontos. Veja alguns exemplos de nomes de arquivos corretos: pagina.htm, pagina, subdiretorio/pagina',
     'invalid_file_inspector' => 'Nome de arquivo inválido. Os nomes dos arquivos podem conter apenas símbolos alfanuméricos, sublinhados, traços e pontos. Alguns exemplos de nomes de arquivos: pagina.htm, pagina, subdiretorio/pagina',
-    'invalid_property' => 'A propriedade ":nome" não pode ser definida',
+    'invalid_property' => 'A propriedade ":name" não pode ser definida',
     'file_already_exists' => 'Arquivo ":name" já existe.',
     'error_saving' => 'Erro ao salvar arquivo ":name". Verifique as permissões de escrita.',
     'error_creating_directory' => 'Erro ao criar o diretório :name. Verifique as permissões de escrita.',
