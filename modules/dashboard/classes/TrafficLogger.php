@@ -129,11 +129,18 @@ class TrafficLogger
     }
 
     /**
-     * getClientId retrieves the client ID from the cookie.
+     * getClientId retrieves the client ID from the cookie. The client ID must have
+     * a maximum length of 64, as enforced by the database.
      */
     protected static function getClientId()
     {
-        return Cookie::get('oc_clid');
+        $value = Cookie::get('oc_clid');
+
+        if (is_string($value)) {
+            return substr($value, 0, 64);
+        }
+
+        return null;
     }
 
     /**
