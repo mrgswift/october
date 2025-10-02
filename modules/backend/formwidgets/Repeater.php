@@ -412,10 +412,12 @@ class Repeater extends FormWidgetBase
         $this->prepareParentModelData();
 
         $groupCode = post('_repeater_group');
-        $index = $this->getNextIndex();
 
         if ($this->useRelation) {
-            $this->createRelationAtIndex($index, $groupCode);
+            $index = $this->createRelationAtIndex($groupCode)->getKey();
+        }
+        else {
+            $index = $this->getNextIndex();
         }
 
         $this->prepareVars();
@@ -436,14 +438,16 @@ class Repeater extends FormWidgetBase
     {
         $fromIndex = post('_repeater_index');
         $groupCode = post('_repeater_group');
-        $toIndex = $this->getNextIndex();
 
         if ($this->useRelation) {
             // Relation must be saved to replicate
             $this->processSaveForRelation([$fromIndex => $this->getValueFromIndex($fromIndex)]);
 
             // Duplicate the model with replication
-            $this->duplicateRelationAtIndex($fromIndex, $toIndex, $groupCode);
+            $toIndex = $this->duplicateRelationAtIndex($fromIndex, $groupCode)->getKey();
+        }
+        else {
+            $toIndex = $this->getNextIndex();
         }
 
         $this->prepareVars();

@@ -39,20 +39,25 @@ trait HasRelationStore
             return $this->relatedRecords;
         }
 
-        $this->relatedRecords = $this->getRelationObject()
+        $records = $this->getRelationObject()
             ->withDeferred($this->getSessionKey())
-            ->get()
-            ->all()
-        ;
+            ->get();
+
+        if ($first = $records->first()) {
+            $records = $records->keyBy($first->getKeyName())->all();
+        }
+        else {
+            $records = [];
+        }
 
         // Store the results locally on the model to make it available to the
         // RelationController via the initNestedRelation method
-        if ($this->relatedRecords) {
+        if ($records) {
             [$model, $attribute] = $this->resolveModelAttribute($this->valueFrom);
-            $model->setRelation($attribute, $model->newCollection($this->relatedRecords));
+            $model->setRelation($attribute, $model->newCollection($records));
         }
 
-        return $this->relatedRecords;
+        return $this->relatedRecords = $records;
     }
 
     /**
@@ -70,7 +75,7 @@ trait HasRelationStore
     /**
      * createRelationAtIndex prepares an empty model and adds it to the index
      */
-    protected function createRelationAtIndex(int $index, ?string $groupCode = null, ?array $attributes = null)
+    protected function createRelationAtIndex(?string $groupCode = null, ?array $attributes = null)
     {
         $model = $this->getRelationModel();
 
@@ -90,7 +95,7 @@ trait HasRelationStore
 
         $this->getRelationObject()->add($model, $this->getSessionKey());
 
-        $this->relatedRecords[$index] = $model;
+        $this->relatedRecords[$model->getKey()] = $model;
 
         return $model;
     }
@@ -98,7 +103,7 @@ trait HasRelationStore
     /**
      * duplicateRelationAtIndex
      */
-    protected function duplicateRelationAtIndex(int $fromIndex, int $index, ?string $groupCode = null)
+    protected function duplicateRelationAtIndex(int $fromIndex, ?string $groupCode = null)
     {
         $model = $this->getModelFromIndex($fromIndex)->replicateWithRelations();
 
@@ -110,7 +115,9 @@ trait HasRelationStore
 
         $this->getRelationObject()->add($model, $this->getSessionKey());
 
-        $this->relatedRecords[$index] = $model;
+        $this->relatedRecords[$model->getKey()] = $model;
+
+        return $model;
     }
 
     /**
@@ -165,13 +172,13 @@ trait HasRelationStore
         }
 
         // Load up the necessary form widgets
-        foreach ($currentValue as $index => $value) {
+        foreach ($currentValue as $value) {
             if (is_array($value)) {
-                $value = $this->createRelationAtIndex($index, null, $value);
+                $value = $this->createRelationAtIndex(null, $value);
             }
 
             $this->makeItemFormWidget(
-                $index,
+                $value->getKey(),
                 $this->getGroupCodeFromRelation($value)
             );
         }
