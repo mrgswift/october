@@ -387,6 +387,9 @@ class ReportDataQueryBuilder
             case ReportMetric::AGGREGATE_COUNT_DISTINCT_NOT_NULL:
                 return 'count(distinct case when %1$s is not null then %1\$s end';
                 break;
+            case ReportMetric::AGGREGATE_NONE:
+                return '%1$s';
+                break;
             default:
                 throw new SystemException('Invalid aggregate function: ' . $function);
         }
