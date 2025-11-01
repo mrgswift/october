@@ -222,7 +222,7 @@ class ReportDataQueryBuilder
         $query = $this->initQuery();
 
         if ($recordUrlTemplate) {
-            $tableName = $this->trimDbObjectName($this->tableName);
+            $tableName = $this->evalDbObjectName($this->tableName);
             // Using the MAX here to avoid the only_full_group_by error when the
             // id column is not functionally dependent on columns in GROUP BY clause
             $query->addSelect(Db::raw("MAX({$tableName}.id) as oc_id"));
@@ -363,7 +363,10 @@ class ReportDataQueryBuilder
         $this->configureQueryCallback = $callback;
     }
 
-    private function aggregateFunctionToSql(string $function): string
+    /**
+     * aggregateFunctionToSql
+     */
+    protected function aggregateFunctionToSql(string $function): string
     {
         switch ($function) {
             case ReportMetric::AGGREGATE_AVG:
@@ -395,12 +398,18 @@ class ReportDataQueryBuilder
         }
     }
 
-    private function trimDbObjectName(string $name)
+    /**
+     * evalDbObjectName is a point to check object names for validity
+     */
+    protected function evalDbObjectName(string $name)
     {
         return trim($name);
     }
 
-    private function applyOrderRule(QueryBuilder $query)
+    /**
+     * applyOrderRule
+     */
+    protected function applyOrderRule(QueryBuilder $query)
     {
         $columnName = null;
         $dataAttributeType = $this->orderRule->getDataAttributeType();
@@ -433,10 +442,13 @@ class ReportDataQueryBuilder
                 break;
         }
 
-        $query->orderBy($this->trimDbObjectName($columnName), $this->orderRule->isAscending() ? 'asc' : 'desc');
+        $query->orderBy($this->evalDbObjectName($columnName), $this->orderRule->isAscending() ? 'asc' : 'desc');
     }
 
-    private function applyFilters(QueryBuilder $query)
+    /**
+     * applyFilters
+     */
+    protected function applyFilters(QueryBuilder $query)
     {
         if (!$this->dimensionFilters) {
             return;
@@ -447,7 +459,10 @@ class ReportDataQueryBuilder
         }
     }
 
-    private function applyFilter(QueryBuilder $query, ReportDimensionFilter $dimensionFilter)
+    /**
+     * applyFilter
+     */
+    protected function applyFilter(QueryBuilder $query, ReportDimensionFilter $dimensionFilter)
     {
         $columnName = null;
         switch ($dimensionFilter->getDataAttributeType()) {
@@ -472,7 +487,7 @@ class ReportDataQueryBuilder
                 break;
         }
 
-        $columnName = $this->trimDbObjectName($columnName);
+        $columnName = $this->evalDbObjectName($columnName);
         $operation = $dimensionFilter->getOperation();
 
         $relationalOperations = [
@@ -506,7 +521,10 @@ class ReportDataQueryBuilder
         throw new SystemException('Invalid filter operation: ' . $operation);
     }
 
-    private function createQueryBuilder(bool $forceSkipGrouping = false, array $forceMetrics = []): QueryBuilder
+    /**
+     * createQueryBuilder
+     */
+    protected function createQueryBuilder(bool $forceSkipGrouping = false, array $forceMetrics = []): QueryBuilder
     {
         $query = Db::table($this->tableName);
 
@@ -517,7 +535,7 @@ class ReportDataQueryBuilder
         $columns = [];
         if (!$skipGrouping) {
             $dimensionColumnName = $this->dimension->getDatabaseColumnName();
-            $dimensionColumnName = $this->trimDbObjectName($dimensionColumnName);
+            $dimensionColumnName = $this->evalDbObjectName($dimensionColumnName);
             $dimensionColumnName = $this->makeDateDimensionGroupingColumnName($dimensionColumnName);
 
             $columns[] = Db::raw(
@@ -531,7 +549,7 @@ class ReportDataQueryBuilder
 
             $dimensionLabelColumnName = $this->dimension->getLabelColumnName();
             if ($dimensionLabelColumnName !== null) {
-                $dimensionLabelColumnName = $this->trimDbObjectName($dimensionLabelColumnName);
+                $dimensionLabelColumnName = $this->evalDbObjectName($dimensionLabelColumnName);
 
                 $columns[] = Db::raw(
                     $dimensionLabelColumnName . ' AS oc_dimension_label'
@@ -559,8 +577,8 @@ class ReportDataQueryBuilder
 
             $aggregateFunction = $this->aggregateFunctionToSql($metric->getAggregateFunction());
             $columnName = $metric->getDatabaseColumnName();
-            $columnName = $this->trimDbObjectName($columnName);
-            $metricColumnName = $this->trimDbObjectName($metric->getDataSetColumName());
+            $columnName = $this->evalDbObjectName($columnName);
+            $metricColumnName = $this->evalDbObjectName($metric->getDataSetColumName());
             $aggregateFunctionFinal = sprintf($aggregateFunction, $columnName);
             $columns[] = Db::raw(
                 sprintf(
@@ -610,7 +628,10 @@ class ReportDataQueryBuilder
         return $query;
     }
 
-    private function makeDateDimensionGroupingColumnName(string $dimensionColumnName): string
+    /**
+     * makeDateDimensionGroupingColumnName
+     */
+    protected function makeDateDimensionGroupingColumnName(string $dimensionColumnName): string
     {
         if (!$this->dimension->isDate()) {
             return $dimensionColumnName;
@@ -620,33 +641,33 @@ class ReportDataQueryBuilder
             case ReportDataSourceBase::GROUP_INTERVAL_DAY:
                 return "DATE(`$dimensionColumnName`)";
                 break;
+
             case ReportDataSourceBase::GROUP_INTERVAL_WEEK:
                 $field = $this->dimension->getWeekGroupingField();
                 if ($field !== null) {
-                    return $this->trimDbObjectName($field);
+                    return $this->evalDbObjectName($field);
                 }
-
                 return "DATE_FORMAT(DATE_ADD(`$dimensionColumnName`, INTERVAL -WEEKDAY(`$dimensionColumnName`) DAY), '%Y-%m-%d')";
+
             case ReportDataSourceBase::GROUP_INTERVAL_MONTH:
                 $field = $this->dimension->getMonthGroupingField();
                 if ($field !== null) {
-                    return $this->trimDbObjectName($field);
+                    return $this->evalDbObjectName($field);
                 }
-
                 return "DATE_FORMAT(`$dimensionColumnName`, '%Y-%m-01')";
+
             case ReportDataSourceBase::GROUP_INTERVAL_QUARTER:
                 $field = $this->dimension->getQuarterGroupingField();
                 if ($field !== null) {
-                    return $this->trimDbObjectName($field);
+                    return $this->evalDbObjectName($field);
                 }
-
                 return "MAKEDATE(YEAR(`$dimensionColumnName`), 1) + INTERVAL (QUARTER(`$dimensionColumnName`) - 1) QUARTER";
+
             case ReportDataSourceBase::GROUP_INTERVAL_YEAR:
                 $field = $this->dimension->getYearGroupingField();
                 if ($field !== null) {
-                    return $this->trimDbObjectName($field);
+                    return $this->evalDbObjectName($field);
                 }
-
                 return "DATE_FORMAT(`$dimensionColumnName`, '%Y-01-01')";
         }
 
