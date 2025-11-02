@@ -43,6 +43,7 @@ class ServiceProvider extends ModuleServiceProvider
     {
         $this->app->singleton('dashboard.dashboards', \Dashboard\Classes\DashManager::class);
         $this->app->singleton('dashboard.demos.traffic', \Dashboard\Classes\CmsDemoTrafficDataGenerator::class);
+        $this->app->singleton('dashboard.traffic.logger', \Dashboard\Classes\TrafficLogger::class);
     }
 
     /**

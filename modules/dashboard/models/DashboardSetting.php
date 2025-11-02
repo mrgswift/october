@@ -21,6 +21,11 @@ class DashboardSetting extends SettingModel
     public $settingsCode = 'dashboard_settings';
 
     /**
+     * @var array jsonable are json encoded attributes
+     */
+    protected $jsonable = ['filter_exclude_roles', 'filter_exclude_ips', 'filter_exclude_paths'];
+
+    /**
      * @var array rules for validation
      */
     public $rules = [];
