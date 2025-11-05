@@ -195,19 +195,19 @@ trait HasWidgetData
 
         $widget = $this->getReportWidget($reportName);
 
-        $widgetProps = array_except($widgetConfig, [
-            'type',
-            'reportName',
-            'widgetClass',
-            '_dash_definition'
-        ]);
-
         if (!$widget) {
             $widget = $this->makeDashReportWidget(new DashReport([
                 'reportName' => $reportName
-            ] + $widgetProps));
+            ] + $widgetConfig));
         }
         else {
+
+            $widgetProps = array_except($widgetConfig, [
+                'type',
+                'reportName',
+                'widgetClass',
+                '_dash_definition'
+            ]);
             $widget->setProperties($widgetProps);
         }
 
