@@ -366,7 +366,7 @@
   "Icon": "Icon",
   "Please select an icon": "Please select an icon",
   "Global Access": "Global Access",
-  "Dashboards with Global Access enabled can be viewed by any user, but this doesn't grant editing permissions.": "Dashboards with Global Access enabled can be viewed by any user, but this doesn't grant editing permissions.",
+  "Dashboards with Global Access enabled can be viewed by other users.": "Dashboards with Global Access enabled can be viewed by other users.",
   "Select Dashboard": "Select Dashboard",
   "Value": "Value",
   "Difference with the previous period": "Difference with the previous period",

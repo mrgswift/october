@@ -637,10 +637,13 @@ class ReportDataQueryBuilder
             return $dimensionColumnName;
         }
 
+        $driver = Db::getDriverName();
+
         switch ($this->groupInterval) {
             case ReportDataSourceBase::GROUP_INTERVAL_DAY:
-                return "DATE(`$dimensionColumnName`)";
-                break;
+                return $driver === 'pgsql'
+                    ?  "$dimensionColumnName::date"
+                    : "DATE(`$dimensionColumnName`)";
 
             case ReportDataSourceBase::GROUP_INTERVAL_WEEK:
                 $field = $this->dimension->getWeekGroupingField();

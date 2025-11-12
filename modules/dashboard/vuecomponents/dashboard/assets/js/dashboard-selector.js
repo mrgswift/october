@@ -19,38 +19,48 @@ Vue.component('dashboard-component-dashboard-dashboard-selector', {
     },
     methods: {
         setEditMenuItems: function () {
-            this.editMenuItems = [
-                {
-                    type: 'text',
-                    command: 'edit',
-                    label: oc.lang.get('dashboard.edit_dashboard')
-                },
-                // {
-                //     type: 'text',
-                //     command: 'rename',
-                //     label: oc.lang.get('dashboard.rename_dashboard')
-                // },
-                // {
-                //     type: 'text',
-                //     command: 'delete',
-                //     label: oc.lang.get('dashboard.delete_dashboard')
-                // },
-                // {
-                //     type: 'separator'
-                // },
-                // {
-                //     type: 'text',
-                //     href: this.store.manageUrl,
-                //     target: '_blank',
-                //     label: oc.lang.get('dashboard.manage_dashboards')
-                // }
-                // {
-                //     type: 'text',
-                //     href: '/export/url/here' + this.store.state.dashboardCode,
-                //     target: '_blank',
-                //     label: oc.lang.get('dashboard.export_dashboard')
-                // }
-            ];
+            this.editMenuItems = [];
+
+            if (this.store.canFork) {
+                this.editMenuItems.push(
+                    {
+                        type: 'text',
+                        command: 'edit',
+                        label: oc.lang.get('dashboard.edit_dashboard_for_me')
+                    },
+                    {
+                        type: 'text',
+                        command: 'edit',
+                        label: oc.lang.get('dashboard.edit_dashboard_for_everyone')
+                    }
+                );
+            }
+            else {
+                this.editMenuItems.push(
+                    {
+                        type: 'text',
+                        command: 'edit',
+                        label: oc.lang.get('dashboard.edit_dashboard')
+                    }
+                );
+            }
+
+            // {
+            //     type: 'text',
+            //     command: 'rename',
+            //     label: oc.lang.get('dashboard.rename_dashboard')
+            // },
+            // {
+            //     type: 'text',
+            //     command: 'delete',
+            //     label: oc.lang.get('dashboard.delete_dashboard')
+            // },
+            // {
+            //     type: 'text',
+            //     href: '/export/url/here' + this.store.state.dashboardCode,
+            //     target: '_blank',
+            //     label: oc.lang.get('dashboard.export_dashboard')
+            // }
 
             if (this.store.manageUrl) {
                 this.editMenuItems.push(

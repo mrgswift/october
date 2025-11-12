@@ -366,7 +366,7 @@
   "Icon": "Icône",
   "Please select an icon": "Veuillez sélectionner une icône",
   "Global Access": "Accès global",
-  "Dashboards with Global Access enabled can be viewed by any user, but this doesn't grant editing permissions.": "Les tableaux de bord avec l'accès global activé peuvent être consultés par tous les utilisateurs, mais cela ne donne pas les permissions d'édition.",
+  "Dashboards with Global Access enabled can be viewed by other users.": "Les tableaux de bord avec l'accès global activé peuvent être consultés par tous les utilisateurs, mais cela ne donne pas les permissions d'édition.",
   "Select Dashboard": "Sélectionner un tableau de bord",
   "Value": "Valeur",
   "Difference with the previous period": "Différence avec la période précédente",

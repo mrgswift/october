@@ -23,42 +23,10 @@ trait HasWidgetData
 
         $dataSource = $this->getRequestedDataSource(post('widget_config'));
         $fetchDataResult = $dataSource->getData($fetchData);
-        // $fetchDataResult = $dataSource->getData(
-        //     $dimensionCode,
-        //     $metricCodes,
-        //     $metricsConfiguration,
-        //     $dateStart,
-        //     $dateEnd,
-        //     $startTimestamp,
-        //     $filters,
-        //     $aggregationInterval,
-        //     $orderRule,
-        //     $limit,
-        //     $paginationParams,
-        //     $hideEmptyDimensionValues,
-        //     new ReportDataCache,
-        //     false
-        // );
 
         $prevIntervalFetchDataResult = null;
         if ($compareData = $fetchData->makeCompareData()) {
             $prevIntervalFetchDataResult = $dataSource->getData($compareData);
-            // $prevIntervalFetchDataResult = $dataSource->getData(
-            //     $dimensionCode,
-            //     $metricCodes,
-            //     $metricsConfiguration,
-            //     $compareDateStart,
-            //     $compareDateEnd,
-            //     null,
-            //     $filters,
-            //     $aggregationInterval,
-            //     $orderRule,
-            //     $limit,
-            //     $paginationParams,
-            //     $hideEmptyDimensionValues,
-            //     new ReportDataCache,
-            //     false // Individual rows for previous periods are not yet supported
-            // );
         }
 
         $metricsData = $this->getDataSourceDimensionMetricData($dataSource, $fetchData->dimensionCode);
@@ -113,16 +81,6 @@ trait HasWidgetData
         }
 
         $data = $widget->getData($fetchData);
-        // $data = $widget->getData(
-        //     $widgetConfig,
-        //     $dateStart,
-        //     $dateEnd,
-        //     $startTimestamp,
-        //     $compareDateStart,
-        //     $compareDateEnd,
-        //     $aggregationInterval,
-        //     $extraData
-        // );
 
         return [
             'data' => $data
@@ -201,7 +159,6 @@ trait HasWidgetData
             ] + $widgetConfig));
         }
         else {
-
             $widgetProps = array_except($widgetConfig, [
                 'type',
                 'reportName',

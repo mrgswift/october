@@ -182,7 +182,7 @@ class Dashboard extends Model
             );
         }
 
-        $dashboard = new Dashboard();
+        $dashboard = new Dashboard;
         $dashboard->name = $name;
         $dashboard->slug = $slug;
         $dashboard->icon = $icon;
@@ -193,6 +193,9 @@ class Dashboard extends Model
         $dashboard->save();
     }
 
+    /**
+     * updateDashboardConfig
+     */
     public static function updateDashboardConfig(string $originalSlug, string $name, string $slug, string $icon, bool $globalAccess)
     {
         $slug = strtolower($slug);

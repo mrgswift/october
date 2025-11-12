@@ -3,6 +3,7 @@
 use BackendMenu;
 use Backend\Classes\Controller;
 use Dashboard\Models\Dashboard;
+use ForbiddenException;
 
 /**
  * Dashboards controller for the dashboard
@@ -65,12 +66,30 @@ class Dashboards extends Controller
      */
     public function formBeforeSave($model)
     {
-        $model->is_custom = 1;
+        $model->is_custom = true;
         $model->owner_type = \Dashboard\Controllers\Index::class;
 
         if ($model->owner_field) {
             $model->code = $model->owner_field;
         }
+    }
+
+    /**
+     * onResetDefault
+     */
+    public function onResetDefault()
+    {
+        if (!$this->formCheckPermission('modelDelete')) {
+            throw new ForbiddenException;
+        }
+
+        if ($model = $this->formFindModelObject(post('form_record_id'))) {
+            $model->is_custom = false;
+            $model->definition = null;
+            $model->save();
+        }
+
+        return $this->listRefresh();
     }
 
     /**

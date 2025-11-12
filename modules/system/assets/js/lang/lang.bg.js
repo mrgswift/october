@@ -259,6 +259,8 @@ window.oc.langMessages['bg'] = $.extend(
         "compare_none": "Disabled",
         "updated_successfully": "The dashboard was successfully updated.",
         "edit_dashboard": "Edit Dashboard",
+        "edit_dashboard_for_me": "Edit Dashboard (For Me)",
+        "edit_dashboard_for_everyone": "Edit Dashboard (For Everyone)",
         "manage_dashboards": "Manage Dashboards",
         "import_success": "The dashboard was successfully imported",
         "new_dashboard": "New Dashboard",
