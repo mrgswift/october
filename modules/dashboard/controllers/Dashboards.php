@@ -95,12 +95,17 @@ class Dashboards extends Controller
     /**
      * formExtendFields
      */
-    public function formExtendFields($host, $fields)
+    public function formExtendFields($form)
     {
-        $model = $host->getModel();
+        $model = $form->getModel();
 
-        if ($model->owner_field && $fields->code) {
-            $fields->code->disabled = true;
+        if ($model->is_system) {
+            $form->getField('code')->disabled();
+            $form->getField('is_global')->disabled();
+            $form->getField('is_interval_hidden')->disabled();
+        }
+        else {
+            $form->getField('_system_definition_hint')->hidden();
         }
     }
 
@@ -109,7 +114,7 @@ class Dashboards extends Controller
      */
     public function listExtendQuery($query)
     {
-        $query->applyOwner(Index::class);
+        $query->applyOwner(Index::class)->applyCreatedUserOrSystem();
     }
 
     /**
@@ -117,6 +122,6 @@ class Dashboards extends Controller
      */
     public function formExtendQuery($query)
     {
-        $query->applyOwner(Index::class);
+        $query->applyOwner(Index::class)->applyCreatedUserOrSystem();
     }
 }

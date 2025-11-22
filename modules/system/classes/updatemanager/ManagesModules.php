@@ -1,6 +1,7 @@
 <?php namespace System\Classes\UpdateManager;
 
 use App;
+use File;
 use Lang;
 use Http;
 use Event;
@@ -121,15 +122,26 @@ trait ManagesModules
         $version = null;
 
         try {
-            // List packages to find version string from october/rain
-            $versions = ComposerManager::instance()->getPackageVersions(['october/system']);
-            $version = $versions['october/system'] ?? null;
+            // Locate version from seed file
+            if (
+                File::exists($seedFile = storage_path('cms/version.json')) &&
+                ($contents = json_decode(File::get($seedFile), true)) &&
+                isset($contents['version'])
+            ) {
+                $version = $contents['version'] ?? null;
+                File::delete($seedFile);
+            }
 
+            // Locate version from october/system package
             if ($version === null) {
-                throw new SystemException('Package october/system not found in composer');
+                $versions = ComposerManager::instance()->getPackageVersions(['october/system']);
+                $version = $versions['october/system'] ?? null;
             }
         }
         catch (Exception $ex) {
+        }
+
+        if ($version === null) {
             $version = '0.0.0';
         }
 

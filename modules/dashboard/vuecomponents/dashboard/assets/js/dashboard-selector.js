@@ -21,28 +21,40 @@ Vue.component('dashboard-component-dashboard-dashboard-selector', {
         setEditMenuItems: function () {
             this.editMenuItems = [];
 
-            if (this.store.canFork) {
+            this.editMenuItems.push(
+                {
+                    type: 'text',
+                    command: 'edit',
+                    label: oc.lang.get('dashboard.edit_dashboard')
+                }
+            );
+
+            if (this.store.state.canMakeDefault || this.store.state.canResetLayout) {
                 this.editMenuItems.push(
                     {
-                        type: 'text',
-                        command: 'edit',
-                        label: oc.lang.get('dashboard.edit_dashboard_for_me')
-                    },
-                    {
-                        type: 'text',
-                        command: 'edit',
-                        label: oc.lang.get('dashboard.edit_dashboard_for_everyone')
+                        type: 'separator'
                     }
                 );
-            }
-            else {
-                this.editMenuItems.push(
-                    {
-                        type: 'text',
-                        command: 'edit',
-                        label: oc.lang.get('dashboard.edit_dashboard')
-                    }
-                );
+
+                if (this.store.state.canMakeDefault) {
+                    this.editMenuItems.push(
+                        {
+                            type: 'text',
+                            command: 'make-default',
+                            label: oc.lang.get('dashboard.make_default')
+                        }
+                    );
+                }
+
+                if (this.store.state.canResetLayout) {
+                    this.editMenuItems.push(
+                        {
+                            type: 'text',
+                            command: 'reset-layout',
+                            label: oc.lang.get('dashboard.reset_layout')
+                        }
+                    );
+                }
             }
 
             // {
@@ -87,6 +99,17 @@ Vue.component('dashboard-component-dashboard-dashboard-selector', {
             Vue.nextTick(() => {
                 if (command === 'edit') {
                     this.store.startEditing();
+                    return;
+                }
+
+                if (command === 'reset-layout') {
+                    this.store.resetLayout();
+                    return;
+                }
+
+                if (command === 'make-default') {
+                    this.store.makeDefault();
+                    return;
                 }
             })
         },

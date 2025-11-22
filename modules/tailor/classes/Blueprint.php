@@ -64,7 +64,7 @@ class Blueprint extends Extendable
     public $exists = false;
 
     /**
-     * @var static defaultDatasource is used by unit tests.
+     * @var string defaultDatasource is used by unit tests.
      */
     protected static $defaultDatasource;
 
