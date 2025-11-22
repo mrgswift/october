@@ -446,8 +446,10 @@ class Dash extends WidgetBase
             $this->code,
         );
 
+        // Reset state
+        $this->reports = $this->getConfig('reports', $this->reports);
+        $this->allReports = [];
         $this->reportsDefined = false;
-        $this->reports = [];
         $this->defineDashReports();
 
         return [
