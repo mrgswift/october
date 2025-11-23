@@ -122,27 +122,31 @@ trait ManagesModules
         $version = null;
 
         try {
-            // Locate version from seed file
-            if (
-                File::exists($seedFile = storage_path('cms/version.json')) &&
-                ($contents = json_decode(File::get($seedFile), true)) &&
-                isset($contents['version'])
-            ) {
-                $version = $contents['version'] ?? null;
-                File::delete($seedFile);
-            }
+            $versions = ComposerManager::instance()->getPackageVersions(['october/system']);
+            $version = $versions['october/system'] ?? null;
+        }
+        catch (Exception $ex) {
+        }
 
+        try {
             // Locate version from october/system package
             if ($version === null) {
-                $versions = ComposerManager::instance()->getPackageVersions(['october/system']);
-                $version = $versions['october/system'] ?? null;
+                // Locate version from seed file
+                if (
+                    File::exists($seedFile = storage_path('cms/version.json')) &&
+                    ($contents = json_decode(File::get($seedFile), true)) &&
+                    isset($contents['version'])
+                ) {
+                    $version = $contents['version'] ?? null;
+                    File::delete($seedFile);
+                }
             }
         }
         catch (Exception $ex) {
         }
 
         if ($version === null) {
-            $version = '0.0.0';
+            return '0';
         }
 
         $build = $this->getBuildFromVersion($version);
