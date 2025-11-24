@@ -278,7 +278,7 @@ class ThemeManager
     {
         $versionHistory = $this->getVersionHistory($dirName);
 
-        $latestVersion = array_key_last($versionHistory);
+        $latestVersion = array_key_first($versionHistory);
 
         if ($latestVersion === null) {
             return '0.0.0';
